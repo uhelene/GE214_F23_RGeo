@@ -1,0 +1,62 @@
+---
+title: "Hello World"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+# You can delete everything above this.
+## Let's make a new section here with a level 1 header labeled something like "Worcester Election Data"
+- use rmarkdown to create the section header 
+- use rmarkdown to make a link that indicates where we got the data: https://gisdata.worcesterma.gov/
+- use plain text to write that this section will show us where Worcester precincts and voting locations are.
+
+```{r}
+library(sf) #here we tell R that we need the Simple Features library (sf)
+library(tmap)    # for static and interactive maps
+library(leaflet) # for interactive maps
+library(ggplot2) # tidyverse data visualization package
+
+#then we create an object called "precs," which is short for precincts and fill it with the data from our geojson file
+precs = read_sf("data/Voting_Precincts_Based_on_2020_Census_Data.geojson")
+
+#the "head" function tells us what is in the object and what kind of object it is
+head(precs)
+
+#let's plot our object
+tm_shape(precs) + 
+  tm_fill()
+
+#now let's try it with some borders
+tm_shape(precs) + 
+  tm_fill() +
+  tm_borders()
+
+#what about some labels?
+tm_shape(precs) + 
+  tm_fill() +
+  tm_borders() +  
+  tm_text()
+
+#that didn't work? how do we learn more about our tm_* (tmap) functions?
+?tmap
+
+#R will let you make a map object and reuse it
+woo_map1 = tm_shape(precs)+tm_fill()+tm_borders()
+
+```
+
+# Polling Stations 
+Your task is to make a new section that imports the voting polling stations and places them on a map.
