@@ -1,5 +1,5 @@
 ---
-title: "Hello World"
+title: "Worcester map"
 output: html_notebook
 ---
 
@@ -60,3 +60,12 @@ woo_map1 = tm_shape(precs)+tm_fill()+tm_borders()
 
 # Polling Stations 
 Your task is to make a new section that imports the voting polling stations and places them on a map.
+```{r}
+
+```
+#elections results
+```{r}
+library(dplyr)
+results=read.csv("data/worc_23_election_atlarge.csv")
+
+```
