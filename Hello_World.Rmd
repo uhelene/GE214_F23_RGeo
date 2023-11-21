@@ -60,3 +60,8 @@ woo_map1 = tm_shape(precs)+tm_fill()+tm_borders()
 
 # Polling Stations 
 Your task is to make a new section that imports the voting polling stations and places them on a map.
+
+```{r}
+
+```
+
