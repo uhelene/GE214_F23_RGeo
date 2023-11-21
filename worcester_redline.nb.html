@@ -11,7 +11,7 @@
 
 
 
-<title>Hello World</title>
+<title>Redlined Worcester</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1746,66 +1746,34 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Hello World</h1>
+<h1 class="title toc-ignore">Redlined Worcester</h1>
 
 </div>
 
 
 <!-- rnb-text-begin -->
-<p>This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a>
-Notebook. When you execute code within the notebook, the results appear
-beneath the code.</p>
-<p>Try executing this chunk by clicking the <em>Run</em> button within
-the chunk or by placing your cursor inside it and pressing
-<em>Ctrl+Shift+Enter</em>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGxvdChjYXJzKVxuYGBgXG5gYGAifQ== -->
-<pre class="r"><code>```r
-plot(cars)</code></pre>
-<p>```</p>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzZikgI2hlcmUgd2UgdGVsbCBSIHRoYXQgd2UgbmVlZCB0aGUgU2ltcGxlIEZlYXR1cmVzIGxpYnJhcnkgKHNmKVxubGlicmFyeSh0bWFwKSAgICAjIGZvciBzdGF0aWMgYW5kIGludGVyYWN0aXZlIG1hcHNcbmxpYnJhcnkobGVhZmxldCkgIyBmb3IgaW50ZXJhY3RpdmUgbWFwc1xubGlicmFyeShnZ3Bsb3QyKSAjIHRpZHl2ZXJzZSBkYXRhIHZpc3VhbGl6YXRpb24gcGFja2FnZVxuYGBgIn0= -->
+<pre class="r"><code>library(sf) #here we tell R that we need the Simple Features library (sf)
+library(tmap)    # for static and interactive maps
+library(leaflet) # for interactive maps
+library(ggplot2) # tidyverse data visualization package</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the
-toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
+toolbar or by pressing <em>Cmd+Option+I</em>.</p>
 <p>When you save the notebook, an HTML file containing the code and
 output will be saved alongside it (click the <em>Preview</em> button or
-press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
+press <em>Cmd+Shift+K</em> to preview the HTML file).</p>
 <p>The preview shows you a rendered HTML copy of the contents of the
 editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not
 run any R code chunks. Instead, the output of the chunk when it was last
 run in the editor is displayed.</p>
-<div id="you-can-delete-everything-above-this." class="section level1">
-<h1>You can delete everything above this.</h1>
-<div id="lets-make-a-new-section-here-with-a-level-1-header-labeled-something-like-worcester-election-data" class="section level2">
-<h2>Let’s make a new section here with a level 1 header labeled
-something like “Worcester Election Data”</h2>
-<ul>
-<li>use rmarkdown to create the section header</li>
-<li>use rmarkdown to make a link that indicates where we got the data:
-<a href="https://gisdata.worcesterma.gov/" class="uri">https://gisdata.worcesterma.gov/</a></li>
-<li>use plain text to write that this section will show us where
-Worcester precincts and voting locations are.</li>
-</ul>
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-</div>
-<div id="polling-stations" class="section level1">
-<h1>Polling Stations</h1>
-<p>Your task is to make a new section that imports the voting polling
-stations and places them on a map.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSGVsbG8gV29ybGQiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KClRoaXMgaXMgYW4gW1IgTWFya2Rvd25dKGh0dHA6Ly9ybWFya2Rvd24ucnN0dWRpby5jb20pIE5vdGVib29rLiBXaGVuIHlvdSBleGVjdXRlIGNvZGUgd2l0aGluIHRoZSBub3RlYm9vaywgdGhlIHJlc3VsdHMgYXBwZWFyIGJlbmVhdGggdGhlIGNvZGUuIAoKVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkN0cmwrU2hpZnQrRW50ZXIqLiAKCmBgYHtyfQpwbG90KGNhcnMpCmBgYAoKQWRkIGEgbmV3IGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqSW5zZXJ0IENodW5rKiBidXR0b24gb24gdGhlIHRvb2xiYXIgb3IgYnkgcHJlc3NpbmcgKkN0cmwrQWx0K0kqLgoKV2hlbiB5b3Ugc2F2ZSB0aGUgbm90ZWJvb2ssIGFuIEhUTUwgZmlsZSBjb250YWluaW5nIHRoZSBjb2RlIGFuZCBvdXRwdXQgd2lsbCBiZSBzYXZlZCBhbG9uZ3NpZGUgaXQgKGNsaWNrIHRoZSAqUHJldmlldyogYnV0dG9uIG9yIHByZXNzICpDdHJsK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuCgpUaGUgcHJldmlldyBzaG93cyB5b3UgYSByZW5kZXJlZCBIVE1MIGNvcHkgb2YgdGhlIGNvbnRlbnRzIG9mIHRoZSBlZGl0b3IuIENvbnNlcXVlbnRseSwgdW5saWtlICpLbml0KiwgKlByZXZpZXcqIGRvZXMgbm90IHJ1biBhbnkgUiBjb2RlIGNodW5rcy4gSW5zdGVhZCwgdGhlIG91dHB1dCBvZiB0aGUgY2h1bmsgd2hlbiBpdCB3YXMgbGFzdCBydW4gaW4gdGhlIGVkaXRvciBpcyBkaXNwbGF5ZWQuCgojIFlvdSBjYW4gZGVsZXRlIGV2ZXJ5dGhpbmcgYWJvdmUgdGhpcy4KIyMgTGV0J3MgbWFrZSBhIG5ldyBzZWN0aW9uIGhlcmUgd2l0aCBhIGxldmVsIDEgaGVhZGVyIGxhYmVsZWQgc29tZXRoaW5nIGxpa2UgIldvcmNlc3RlciBFbGVjdGlvbiBEYXRhIgotIHVzZSBybWFya2Rvd24gdG8gY3JlYXRlIHRoZSBzZWN0aW9uIGhlYWRlciAKLSB1c2Ugcm1hcmtkb3duIHRvIG1ha2UgYSBsaW5rIHRoYXQgaW5kaWNhdGVzIHdoZXJlIHdlIGdvdCB0aGUgZGF0YTogaHR0cHM6Ly9naXNkYXRhLndvcmNlc3Rlcm1hLmdvdi8KLSB1c2UgcGxhaW4gdGV4dCB0byB3cml0ZSB0aGF0IHRoaXMgc2VjdGlvbiB3aWxsIHNob3cgdXMgd2hlcmUgV29yY2VzdGVyIHByZWNpbmN0cyBhbmQgdm90aW5nIGxvY2F0aW9ucyBhcmUuCgpgYGB7cn0KbGlicmFyeShzZikgI2hlcmUgd2UgdGVsbCBSIHRoYXQgd2UgbmVlZCB0aGUgU2ltcGxlIEZlYXR1cmVzIGxpYnJhcnkgKHNmKQpsaWJyYXJ5KHRtYXApICAgICMgZm9yIHN0YXRpYyBhbmQgaW50ZXJhY3RpdmUgbWFwcwpsaWJyYXJ5KGxlYWZsZXQpICMgZm9yIGludGVyYWN0aXZlIG1hcHMKbGlicmFyeShnZ3Bsb3QyKSAjIHRpZHl2ZXJzZSBkYXRhIHZpc3VhbGl6YXRpb24gcGFja2FnZQoKI3RoZW4gd2UgY3JlYXRlIGFuIG9iamVjdCBjYWxsZWQgInByZWNzLCIgd2hpY2ggaXMgc2hvcnQgZm9yIHByZWNpbmN0cyBhbmQgZmlsbCBpdCB3aXRoIHRoZSBkYXRhIGZyb20gb3VyIGdlb2pzb24gZmlsZQpwcmVjcyA9IHJlYWRfc2YoImRhdGEvVm90aW5nX1ByZWNpbmN0c19CYXNlZF9vbl8yMDIwX0NlbnN1c19EYXRhLmdlb2pzb24iKQoKI3RoZSAiaGVhZCIgZnVuY3Rpb24gdGVsbHMgdXMgd2hhdCBpcyBpbiB0aGUgb2JqZWN0IGFuZCB3aGF0IGtpbmQgb2Ygb2JqZWN0IGl0IGlzCmhlYWQocHJlY3MpCgojbGV0J3MgcGxvdCBvdXIgb2JqZWN0CnRtX3NoYXBlKHByZWNzKSArIAogIHRtX2ZpbGwoKQoKI25vdyBsZXQncyB0cnkgaXQgd2l0aCBzb21lIGJvcmRlcnMKdG1fc2hhcGUocHJlY3MpICsgCiAgdG1fZmlsbCgpICsKICB0bV9ib3JkZXJzKCkKCiN3aGF0IGFib3V0IHNvbWUgbGFiZWxzPwp0bV9zaGFwZShwcmVjcykgKyAKICB0bV9maWxsKCkgKwogIHRtX2JvcmRlcnMoKSArICAKICB0bV90ZXh0KCkKCiN0aGF0IGRpZG4ndCB3b3JrPyBob3cgZG8gd2UgbGVhcm4gbW9yZSBhYm91dCBvdXIgdG1fKiAodG1hcCkgZnVuY3Rpb25zPwo/dG1hcAoKI1Igd2lsbCBsZXQgeW91IG1ha2UgYSBtYXAgb2JqZWN0IGFuZCByZXVzZSBpdAp3b29fbWFwMSA9IHRtX3NoYXBlKHByZWNzKSt0bV9maWxsKCkrdG1fYm9yZGVycygpCgpgYGAKCiMgUG9sbGluZyBTdGF0aW9ucyAKWW91ciB0YXNrIGlzIHRvIG1ha2UgYSBuZXcgc2VjdGlvbiB0aGF0IGltcG9ydHMgdGhlIHZvdGluZyBwb2xsaW5nIHN0YXRpb25zIGFuZCBwbGFjZXMgdGhlbSBvbiBhIG1hcC4KCmBgYHtyfQoKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUmVkbGluZWQgV29yY2VzdGVyIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpgYGB7cn0KbGlicmFyeShzZikgI2hlcmUgd2UgdGVsbCBSIHRoYXQgd2UgbmVlZCB0aGUgU2ltcGxlIEZlYXR1cmVzIGxpYnJhcnkgKHNmKQpsaWJyYXJ5KHRtYXApICAgICMgZm9yIHN0YXRpYyBhbmQgaW50ZXJhY3RpdmUgbWFwcwpsaWJyYXJ5KGxlYWZsZXQpICMgZm9yIGludGVyYWN0aXZlIG1hcHMKbGlicmFyeShnZ3Bsb3QyKSAjIHRpZHl2ZXJzZSBkYXRhIHZpc3VhbGl6YXRpb24gcGFja2FnZQpgYGAKCkFkZCBhIG5ldyBjaHVuayBieSBjbGlja2luZyB0aGUgKkluc2VydCBDaHVuayogYnV0dG9uIG9uIHRoZSB0b29sYmFyIG9yIGJ5IHByZXNzaW5nICpDbWQrT3B0aW9uK0kqLgoKV2hlbiB5b3Ugc2F2ZSB0aGUgbm90ZWJvb2ssIGFuIEhUTUwgZmlsZSBjb250YWluaW5nIHRoZSBjb2RlIGFuZCBvdXRwdXQgd2lsbCBiZSBzYXZlZCBhbG9uZ3NpZGUgaXQgKGNsaWNrIHRoZSAqUHJldmlldyogYnV0dG9uIG9yIHByZXNzICpDbWQrU2hpZnQrSyogdG8gcHJldmlldyB0aGUgSFRNTCBmaWxlKS4gCgpUaGUgcHJldmlldyBzaG93cyB5b3UgYSByZW5kZXJlZCBIVE1MIGNvcHkgb2YgdGhlIGNvbnRlbnRzIG9mIHRoZSBlZGl0b3IuIENvbnNlcXVlbnRseSwgdW5saWtlICpLbml0KiwgKlByZXZpZXcqIGRvZXMgbm90IHJ1biBhbnkgUiBjb2RlIGNodW5rcy4gSW5zdGVhZCwgdGhlIG91dHB1dCBvZiB0aGUgY2h1bmsgd2hlbiBpdCB3YXMgbGFzdCBydW4gaW4gdGhlIGVkaXRvciBpcyBkaXNwbGF5ZWQuCgo=</div>
 
 
 
@@ -1852,7 +1820,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("Hello_World.Rmd");
+  window.initializeSourceEmbed("worcester_redline.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
