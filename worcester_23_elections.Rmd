@@ -1,0 +1,132 @@
+---
+title: "Exploring Worcester Election Data for 2023"
+output: html_notebook
+---
+
+## Let's make a new section here with a level 1 header labeled something like "Worcester Election Data"
+- use rmarkdown to create the section header 
+- use rmarkdown to make a link that indicates where we got the data: https://gisdata.worcesterma.gov/
+- use plain text to write that this section will show us where Worcester precincts and voting locations are.
+
+```{r}
+library(sf) #here we tell R that we need the Simple Features library (sf)
+library(tmap)    # for static and interactive maps
+library(leaflet) # for interactive maps
+library(ggplot2) # tidyverse data visualization package
+
+#then we create an object called "precs," which is short for precincts and fill it with the data from our geojson file
+precs = read_sf("data/Voting_Precincts_Based_on_2020_Census_Data.geojson")
+
+#the "head" function tells us what is in the object and what kind of object it is
+head(precs)
+
+#let's plot our object
+tm_shape(precs) + 
+  tm_fill()
+
+#now let's try it with some borders
+tm_shape(precs) + 
+  tm_fill() +
+  tm_borders()
+
+#what about some labels?
+tm_shape(precs) + 
+  tm_fill() +
+  tm_borders() +  
+  tm_text("Ward_Precinct","AREA")
+
+#that didn't work? how do we learn more about our tm_* (tmap) functions?
+?tmap
+
+#R will let you make a map object and reuse it
+woo_map1 = tm_shape(precs)+tm_fill()+tm_borders()
+woo_map1
+```
+
+# Polling Stations 
+Your task is to make a new section that imports the voting polling stations and places them on a map.
+
+```{r}
+polls = read_sf("data/Polling_Locations.geojson")
+woo_map2 = tm_shape(polls) +
+  tm_dots(col="red")
+
+woo_map1+woo_map2
+```
+# Let's add some voter data
+Here we add the results from the last election in Worcsester, stored as .csv file, and then use a simple loop to generate a grid of maps that show us the differences in results by candidate.
+
+```{r}
+library(dplyr) #we need one more library here to do some data wrangling later
+
+results = read.csv("data/worc_23_election_atlarge.csv") #create an object called "results" that contains our csv
+head(results) #check and see that results was read into R correctly and what kind of data we have here
+
+```
+
+## Join the Data
+Now we need to "join" the data in results to the polygons stored in the "precs" object. 
+
+To do this we will use a very standard function in any data-management / database language called a *join*
+which does what it says -- joins two or more tables together based on a common feature in each called a key-pair
+in short, the function gets a column with unique values in it, in our case the "Ward_precincts" in the precs table, and searches through a column in another table, in our case the "ward" column of the results table, to find a pair of values that match. So, if there is a row that has a Ward_precicnt called "4-2" in precs and a row with a "ward" called "4-2" in results, the fucntion will join everything in the two rows together. It will go through *all* of the rows, using the values from precs as a "key" looking for a matching value in the results table.
+In our case we are using a "left_join" which effectively holds the table on the left static and joins new data to it. If you've worked with GIS software like ArcGIS or qGIS, this is the most standard kind of join for spatial data, but there are several other kinds of joins that go different directions and produce different kinds of tables.
+```{r}
+#creates a new table called prec_results with the joined data
+prec_results = left_join(precs, results, by=c('Ward_Precinct'='ward'))
+
+#make sure we still have a simple-feature spatial ojbect that can be mapped
+head(prec_results)
+```
+
+## Make a simple map
+First let's make a sample map of *one* candidate to visualize the data and fine-tune the symbology.
+
+We will start with Guillermo Creamer, who is first in our columns of candidates alphabetically.
+
+All we have to do is create a tmap ojbect with the prec_results and tell tmap to use the "creamer" column for the polygons.
+
+**note** that by default the tmap package bins the data and tries to create a pretty map that is logical and useful the results aren't bad! but we will explore how to take control of them in a moment.
+
+```{r}
+tm_shape(prec_results) + tm_polygons("creamer")
+
+# STUDENTS: This is a good place to run ?tmap and ?tm_polygons to see how you can adjust the breaks, colors and overall design of the maps.
+```
+
+## Make two simple maps
+What if we wanted to see a map of creamer and the next candidate, morales at the same time? We already know how to make map objects that can be stored and stacked, like the precicnts and points above, but what about next to each other? This is where the tmap_arrange function comes in:
+```{r}
+creamer_map = tm_shape(prec_results) + tm_polygons("creamer")
+morales_map = tm_shape(prec_results) + tm_polygons("morales")
+
+tmap_arrange(creamer_map,morales_map)
+```
+
+## Make Many Maps
+So then what if you want to see *everyone* who ran for an at-large city council position in Worcester? We could copy and paste our tmap functions over and over, replacing the names each time, and then write a tmap_arrange with all of the map objects -- but it will get tedious and is prone to mistakes. This is where we want to let R just loop through the table and make the maps for us.
+```{r}
+
+#we need to make a list of all of the candidates that we want to make maps for
+candidates = colnames(prec_results[8:19]) # we use 8 through 19 because those are the columns with our candidates
+
+#we need to make an empty list that will hold our maps
+## IMPORTANT: If you re-run the loop below, it will keep adding to the list, so you need to run this as part of the loop to clear the list each-time
+mapz = list() 
+
+for (i in candidates[1:12]){ # this is telling R to go through our list of candidates and for each one do something
+
+#the first thing to do is make a map, the important thing here is the tm_polygons uses the variable "i", which is the name of a candidate -- technically the name of a column -- that it will use to create the map.
+  
+#STUDENTS: try adjusting the tm_polygons function with properties you developed above to change the maps
+  themap = tm_shape(prec_results) + tm_polygons(i) + tm_layout(legend.outside = TRUE)
+  mapz<-append(mapz,list(themap)) #we then add each map to our list
+}
+
+#use tmap_arrange to display all the maps in 4 columns
+tmap_arrange(mapz, ncol=4)
+
+```
+
+
+
